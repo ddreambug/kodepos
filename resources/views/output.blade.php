@@ -55,10 +55,11 @@
                 @endforeach
             </select>
             <select id="kota" class="dynamic input-lg">
-                <option>Pilih Kota</option>
+                <option> Pilih Kota</option>
             </select><br>
             {{csrf_field()}}
-            <button>Custom Filter</button>
+            <button id="buttonfilter" onclick="updateData()" style="display: none;">Custom Filter</button>
+            <button id="resetfilter" onclick="resetData()" style="display: none;">Reset Filter</button>
         </div>
 
 
@@ -74,7 +75,7 @@
                         <td>KELURAHAN</td>
                     </tr>
                     <tbody>
-                        @foreach ($datakota as $d)
+                        @foreach ($alldata as $d)
                         <tr>
                             <td>{{$d->kode_wilayah}}</td>
                             <td>{{$d->kode_pos}}</td>
@@ -93,9 +94,24 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script>
+            function updateData(){
+                    var selectFilter = document.getElementById("kota");
+                    var selectOption = selectFilter.options[selectFilter.selectedIndex];
+                    table.fnFilter(selectOption.value);
+                }
+            function resetData(){
+                table.fnFilter('');
+            }
+            
             $(document).ready(function(){
-                $('#table').dataTable();
-   
+                table = $('#table').dataTable();
+                
+               
+
+                // $("#myFilter").on('keyup', function (){
+                //     $('#store-list').dataTable().fnFilter(this.value);
+                // });
+
                 $('#provinsi').change(function(){
                     if($(this).val() != ''){
                         var select = $(this).attr("id");
@@ -108,12 +124,22 @@
                             method: "POST",
                             data:{select:select,value:value,_token:_token,dependent:dependent},
                             success:function(result){
+
                                 $('#'+dependent).html(result);
                             }
                         })
                     }
                 })
-     
+
+                $('#kota').change(function(){
+                    var btn = document.getElementById("buttonfilter");
+                    var btn2 = document.getElementById("resetfilter");
+                    if (btn.style.display === "none") {
+                        btn.style.display = "block";
+                        btn2.style.display = "block";
+                    } 
+                    
+                })
             });
         </script>
         <script>

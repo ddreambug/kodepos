@@ -8,18 +8,14 @@ use Illuminate\Support\Facades\DB;
 
 class DataController extends Controller
 {
-    // public function index(){
-    //     $datakota = DataModel::all();
-    //     return view('output',compact(['datakota']));
-    // }
-
-    function index(){
-        $datalist = DB::table('datakota')
+    public function index(){
+        $alldata = DB::table('datakota')
+            ->get();
+        $datakota = DB::table('datakota')
             ->groupBy('provinsi')
             ->get();
-        return view('output')->with('datakota',$datalist);
+        return view('output',compact(['alldata','datakota']));
     }
-
 
     function fetch(Request $request){
         $select = $request->get('select');
