@@ -66,9 +66,9 @@ class DataController extends Controller
             
             //dd($parsedData);
             DataModel::create($parsedData);
-            return redirect('/input');
+            $successmsg = "Success terinput!";
+            return redirect('/input')->with('success',$successmsg);
         }catch (\InvalidArgumentException $e) {
-            //return response()->json(['error' => $e->getMessage()], 400);
             return redirect('/input')->with('error', $e->getMessage());
         }
     }

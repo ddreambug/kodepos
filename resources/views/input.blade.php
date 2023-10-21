@@ -42,9 +42,19 @@
                     @csrf 
                     <label for="inputf">input data</label> <br> 
                     <a style="color:#cbd5e0; font-size:small;">Format: kode_wilayah|kode_pos|provinsi|kota|kecamatan|kelurahan</a> <br>
-                    <input type="text" name="data" size="46">
+                    <input type="text" name="data" size="48">
                     <input type="submit" value="save">
-                </form>
+                    @if(Session::has('error'))
+                        <div class="alert alert-danger">
+                          <a style="color: red;">{{ Session::get('error') }}, Cek Lagi Inputan Anda!</a>
+                        </div>
+                    @elseif(Session::has('success'))
+                        <div class="alert alert-success">
+                        <a style="color:limegreen;">Data Telah Terinput, Silahkan Lihat di (Sidebar>Lihat Data)</a>
+                        </div>
+                    @endif
+                    
+                </form>     
             </div>
         </div>
 
@@ -57,11 +67,13 @@
             document.getElementById("sidebar").style.display = "none";
             }
         </script>
+
+        <!-- mau nyoba alert js popup didalam blade tapi kok error, dai yaudah pake text aja wkwk
         <script>
             @if(Session::has('error'))
                 var errorMessage = '{{ Session::get('error') }}'; 
                 alert(errorMessage);
             @endif
-        </script>
+        </script> -->
     </body>
 </html>

@@ -54,11 +54,11 @@
                 <option value="{{$row->provinsi}}">{{$row->provinsi}} </option>
                 @endforeach
             </select>
-            <select id="kota" class="dynamic input-lg">
+            <select id="kota" class="dynamic input-lg" onclick="updateData()">
                 <option> Pilih Kota</option>
             </select><br>
             {{csrf_field()}}
-            <button id="buttonfilter" onclick="updateData()" style="display: none;">Custom Filter</button>
+            <!-- <button id="buttonfilter" onclick="updateData()" style="display: none;">Custom Filter</button> tidak digunakan karena onClick sudah tercover di select kota-->
             <button id="resetfilter" onclick="resetData()" style="display: none;">Reset Filter</button>
         </div>
 
