@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataModel;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class DataController extends Controller
 {
+
     public function index(){
         $alldata = DB::table('datakota')
             ->get();
@@ -32,4 +35,42 @@ class DataController extends Controller
         echo $output;
     }
 
+    public function parseData(Request $request){
+        $data = $request->input('data'); 
+        $dataComponents = explode('|', $data);
+
+        if (count($dataComponents) === 6) {
+            list($kode_wilayah, $kode_pos, $provinsi, $kota, $kecamatan, $kelurahan) = $dataComponents;
+
+            return [
+                'kode_wilayah' => $kode_wilayah,
+                'kode_pos' => $kode_pos,
+                'provinsi' => $provinsi,
+                'kota' => $kota,
+                'kecamatan' => $kecamatan,
+                'kelurahan' => $kelurahan,
+            ];
+        } else {
+            throw new \InvalidArgumentException('Invalid data format');
+        }
+    }
+
+    //pake laravel eloquent untuk input
+    public function store(Request $request){
+        try{
+            $parsedData = $this->parseData($request);
+            // $inputData = new DataModel();
+            // $inputData->json_data = $parsedData;
+            // $inputData->save();
+            
+            
+            //dd($parsedData);
+            DataModel::create($parsedData);
+            return redirect('/input');
+        }catch (\InvalidArgumentException $e) {
+            //return response()->json(['error' => $e->getMessage()], 400);
+            return redirect('/input')->with('error', $e->getMessage());
+        }
+    }
+    
 }

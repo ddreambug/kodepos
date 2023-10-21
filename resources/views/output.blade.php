@@ -37,7 +37,7 @@
     <body class="antialiased">
         <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none;color:#2d3748" id="sidebar">
             <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
-            <a href="http://127.0.0.1:8000/" class="w3-bar-item w3-button">Input Data</a>
+            <a href="http://127.0.0.1:8000/input" class="w3-bar-item w3-button">Input Data</a>
             <a href="http://127.0.0.1:8000/data" class="w3-bar-item w3-button">Lihat Data</a>
         </div>
         
@@ -94,6 +94,7 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script>
+            
             function updateData(){
                     var selectFilter = document.getElementById("kota");
                     var selectOption = selectFilter.options[selectFilter.selectedIndex];
@@ -105,12 +106,6 @@
             
             $(document).ready(function(){
                 table = $('#table').dataTable();
-                
-               
-
-                // $("#myFilter").on('keyup', function (){
-                //     $('#store-list').dataTable().fnFilter(this.value);
-                // });
 
                 $('#provinsi').change(function(){
                     if($(this).val() != ''){

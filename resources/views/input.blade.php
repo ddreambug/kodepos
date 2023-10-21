@@ -26,7 +26,7 @@
     <body class="antialiased">
         <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none;color:#2d3748" id="sidebar">
             <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
-            <a href="http://127.0.0.1:8000/" class="w3-bar-item w3-button">Input Data</a>
+            <a href="http://127.0.0.1:8000/input" class="w3-bar-item w3-button">Input Data</a>
             <a href="http://127.0.0.1:8000/data" class="w3-bar-item w3-button">Lihat Data</a>
         </div> 
         <div class="bg-gray-100 dark:bg-gray-900">
@@ -38,10 +38,13 @@
             <div>  
                 <h1 style="text-align: center;">Kodepos Daerah</h1><br><br>
 
-                <label for="inputf">input data</label> <br>
-                <a style="color:#cbd5e0; font-size:small;">Format: kode_wilayah|kode_pos|provinsi|kota|kecamatan|kelurahan</a> <br>
-                <input type="text" name="inputf" size="46">
-                <button type="submit" onclick="alert('tersubmit')">Submit</button>
+                <form action="/input/store" method="POST">
+                    @csrf 
+                    <label for="inputf">input data</label> <br> 
+                    <a style="color:#cbd5e0; font-size:small;">Format: kode_wilayah|kode_pos|provinsi|kota|kecamatan|kelurahan</a> <br>
+                    <input type="text" name="data" size="46">
+                    <input type="submit" value="save">
+                </form>
             </div>
         </div>
 
@@ -53,6 +56,12 @@
             function w3_close() {
             document.getElementById("sidebar").style.display = "none";
             }
+        </script>
+        <script>
+            @if(Session::has('error'))
+                var errorMessage = '{{ Session::get('error') }}'; 
+                alert(errorMessage);
+            @endif
         </script>
     </body>
 </html>

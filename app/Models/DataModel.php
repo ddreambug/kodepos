@@ -9,4 +9,5 @@ class DataModel extends Model
 {
     use HasFactory;
     protected $table = 'datakota';
+    protected $guarded = [''];
 }

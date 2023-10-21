@@ -14,10 +14,12 @@ use App\Http\Controllers\KotaDropdownController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
+Route::get('/',function(){
+    return redirect("http://127.0.0.1:8000/input");
+});
+Route::get('/input', function(){
     return view('input');
-}); 
-
+});
+Route::post('/input/store',[DataController::class,'store']);
 Route::get('/data',[DataController::class,'index']);
 Route::post('data/route',[DataController::class,'fetch'])->name('datacontroller.fetch');
