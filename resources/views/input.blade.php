@@ -39,10 +39,13 @@
                 <h1 style="text-align: center;">Kodepos Daerah</h1><br><br>
 
                 <form action="/input/store" method="POST">
+
                     @csrf 
                     <label for="inputf">input data</label> <br> 
                     <a style="color:#cbd5e0; font-size:small;">Format: kode_wilayah|kode_pos|provinsi|kota|kecamatan|kelurahan</a> <br>
+                    
                     <input type="text" name="data" size="48">
+                    
                     <input type="submit" value="save">
                     @if(Session::has('error'))
                         <div class="alert alert-danger">

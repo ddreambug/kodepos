@@ -59,12 +59,6 @@ class DataController extends Controller
     public function store(Request $request){
         try{
             $parsedData = $this->parseData($request);
-            // $inputData = new DataModel();
-            // $inputData->json_data = $parsedData;
-            // $inputData->save();
-            
-            
-            //dd($parsedData);
             DataModel::create($parsedData);
             $successmsg = "Success terinput!";
             return redirect('/input')->with('success',$successmsg);
