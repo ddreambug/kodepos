@@ -46,18 +46,19 @@
                     <input type="submit" value="save">
                     @if(Session::has('error'))
                         <div class="alert alert-danger">
-                          <a style="color: red;">{{ Session::get('error') }}, Cek Lagi Inputan Anda!</a>
+                          <a style="color: red;" id="alertFailed">{{ Session::get('error') }}, Cek Lagi Inputan Anda!</a>
                         </div>
                     @elseif(Session::has('success'))
                         <div class="alert alert-success">
-                        <a style="color:limegreen;">Data Telah Terinput, Silahkan Lihat di (Sidebar>Lihat Data)</a>
+                        <a style="color:limegreen;" id="alertSuccess">Data Telah Terinput, Silahkan Lihat di (Sidebar>Lihat Data)</a>
                         </div>
-                    @endif
-                    
+                    @endif                 
                 </form>     
             </div>
         </div>
 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- sidebar script  -->
         <script>
             function w3_open() {
             document.getElementById("sidebar").style.display = "block";
@@ -67,9 +68,22 @@
             document.getElementById("sidebar").style.display = "none";
             }
         </script>
+        <!--biar text ilang setelah x second -->
+        <script> 
+            var alertFail = document.getElementById('alertFailed');
+            var alertSucc = document.getElementById('alertSuccess');
+            var delay = 4000;
 
-        <!-- mau nyoba alert js popup didalam blade tapi kok error, dai yaudah pake text aja wkwk
-        <script>
+            setTimeout(function() {
+                alertFail.classList.add('hidden'); 
+            }, delay);
+
+            setTimeout(function() {
+                alertSucc.classList.add('hidden'); 
+            }, delay);
+        </script>
+         
+        <!--<script> // ini mau nyoba alert js popup didalam blade tapi kok error, dai yaudah pake text aja wkwk
             @if(Session::has('error'))
                 var errorMessage = '{{ Session::get('error') }}'; 
                 alert(errorMessage);

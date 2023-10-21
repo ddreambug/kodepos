@@ -58,7 +58,6 @@
                 <option> Pilih Kota</option>
             </select><br>
             {{csrf_field()}}
-            <!-- <button id="buttonfilter" onclick="updateData()" style="display: none;">Custom Filter</button> tidak digunakan karena onClick sudah tercover di select kota-->
             <button id="resetfilter" onclick="resetData()" style="display: none;">Reset Filter</button>
         </div>
 
@@ -102,6 +101,11 @@
                 }
             function resetData(){
                 table.fnFilter('');
+                var filter1 = document.getElementById("provinsi");
+                var filter2 = document.getElementById("kota");
+                filter1.selectedIndex=0;
+                filter2.selectedIndex=0;
+
             }
             
             $(document).ready(function(){
@@ -127,11 +131,9 @@
                 })
 
                 $('#kota').change(function(){
-                    var btn = document.getElementById("buttonfilter");
-                    var btn2 = document.getElementById("resetfilter");
+                    var btn = document.getElementById("resetfilter");
                     if (btn.style.display === "none") {
                         btn.style.display = "block";
-                        btn2.style.display = "block";
                     } 
                     
                 })
