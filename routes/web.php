@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\KotaDropdownController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,7 @@ use App\Http\Controllers\DataController;
 
 Route::get('/', function () {
     return view('input');
-});
+}); 
 
 Route::get('/data',[DataController::class,'index']);
+Route::post('data/route',[DataController::class,'fetch'])->name('datacontroller.fetch');

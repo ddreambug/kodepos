@@ -48,18 +48,16 @@
         <div class="flex items-top justify-center min-h-10 bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0"><a>Need custom filter?</a></div>
         <div class="flex items-top justify-center min-h-10 bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
                 
-            <select id="provinsi">
+            <select id="provinsi" class="dynamic input-lg" data-dependent="kota">
                 <option> Pilih Provinsi</option>
                 @foreach ($datakota as $row)
                 <option value="{{$row->provinsi}}">{{$row->provinsi}} </option>
                 @endforeach
             </select>
-            <select id="kota">
-                <option> Pilih Kota</option>
-                @foreach ($datakota as $row)
-                <option value="">{{$row->kota}} </option>
-                @endforeach
+            <select id="kota" class="dynamic input-lg">
+                <option>Pilih Kota</option>
             </select><br>
+            {{csrf_field()}}
             <button>Custom Filter</button>
         </div>
 
@@ -97,7 +95,24 @@
         <script>
             $(document).ready(function(){
                 $('#table').dataTable();
+   
+                $('#provinsi').change(function(){
+                    if($(this).val() != ''){
+                        var select = $(this).attr("id");
+                        var value = $(this).val();
+                        var dependent = $(this).data('dependent');
+                        var _token = $('input[name="_token"]').val();
 
+                        $.ajax({
+                            url:"{{ route('datacontroller.fetch') }}",
+                            method: "POST",
+                            data:{select:select,value:value,_token:_token,dependent:dependent},
+                            success:function(result){
+                                $('#'+dependent).html(result);
+                            }
+                        })
+                    }
+                })
      
             });
         </script>
