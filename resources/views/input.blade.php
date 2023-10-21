@@ -19,6 +19,7 @@
             body {
                 font-family: 'Nunito', sans-serif; color: white;
             }
+
         </style>
 
     </head>
@@ -27,11 +28,22 @@
             <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
             <a href="http://127.0.0.1:8000/" class="w3-bar-item w3-button">Input Data</a>
             <a href="http://127.0.0.1:8000/data" class="w3-bar-item w3-button">Lihat Data</a>
-        </div>
-        
+        </div> 
         <div class="bg-gray-100 dark:bg-gray-900">
-            <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰
-        </button></div>
+            <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
+            <a>Input Data</a>
+        </div>
+
+        <div class="flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+            <div>  
+                <h1 style="text-align: center;">Kodepos Daerah</h1><br><br>
+
+                <label for="inputf">input data</label> <br>
+                <a style="color:#cbd5e0; font-size:small;">Format: kode_wilayah|kode_pos|provinsi|kota|kecamatan|kelurahan</a> <br>
+                <input type="text" name="inputf" size="46">
+                <button type="submit" onclick="alert('tersubmit')">Submit</button>
+            </div>
+        </div>
 
         <script>
             function w3_open() {
@@ -42,16 +54,5 @@
             document.getElementById("sidebar").style.display = "none";
             }
         </script>
-
-        <div class="flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-        <div>  
-                <h1 style="text-align: center;">Kodepos Daerah</h1><br><br>
-                
-                <label for="inputf">input data</label> <br>
-                <a style="color:#cbd5e0; font-size:small;">Format: kode_wilayah|kode_pos|provinsi|kota|kecamatan|kelurahan</a> <br>
-                <input type="text" name="inputf" size="46">
-                <button type="submit" onclick="alert('tersubmit')">Submit</button>
-            </div>
-        </div>
     </body>
 </html>

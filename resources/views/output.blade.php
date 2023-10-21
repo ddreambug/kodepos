@@ -26,6 +26,11 @@
                 padding: 5px;
                 border-collapse: collapse;
             }
+            br {
+                content: '\A';
+                display: contents;
+                white-space: pre;
+            }
         </style>
 
     </head>
@@ -37,9 +42,65 @@
         </div>
         
         <div class="bg-gray-100 dark:bg-gray-900">
-            <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰
-        </button></div>
+            <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
+            <a>Data List</a>
+        </div>
+        <div class="flex items-top justify-center min-h-10 bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0"><a>Need custom filter?</a></div>
+        <div class="flex items-top justify-center min-h-10 bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+                
+            <select id="provinsi">
+                <option> Pilih Provinsi</option>
+                @foreach ($datakota as $row)
+                <option value="{{$row->provinsi}}">{{$row->provinsi}} </option>
+                @endforeach
+            </select>
+            <select id="kota">
+                <option> Pilih Kota</option>
+                @foreach ($datakota as $row)
+                <option value="">{{$row->kota}} </option>
+                @endforeach
+            </select><br>
+            <button>Custom Filter</button>
+        </div>
 
+
+        <div class="flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <td>KODE WILAYAH</td>
+                        <td>KODE POS</td>
+                        <td>PROVINSI</td>
+                        <td>KOTA</td>
+                        <td>KECAMATAN</td>
+                        <td>KELURAHAN</td>
+                    </tr>
+                    <tbody>
+                        @foreach ($datakota as $d)
+                        <tr>
+                            <td>{{$d->kode_wilayah}}</td>
+                            <td>{{$d->kode_pos}}</td>
+                            <td>{{$d->provinsi}}</td>
+                            <td>{{$d->kota}}</td>
+                            <td>{{$d->kecamatan}}</td>
+                            <td>{{$d->kelurahan}}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </thead>
+            </table>
+        </div>
+
+        <!-- script disini -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#table').dataTable();
+
+     
+            });
+        </script>
         <script>
             function w3_open() {
             document.getElementById("sidebar").style.display = "block";
@@ -48,42 +109,6 @@
             function w3_close() {
             document.getElementById("sidebar").style.display = "none";
             }
-        </script>
-
-        <div class="flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-        <div>  
-            
-       
-        <table id="table">
-            <thead>
-                <tr>
-                    <td>KODE WILAYAH</td>
-                    <td>KODE POS</td>
-                    <td>PROVINSI</td>
-                    <td>KOTA</td>
-                    <td>KECAMATAN</td>
-                    <td>KELURAHAN</td>
-                </tr>
-                <tbody>
-                    @foreach ($datakota as $d)
-                    <tr>
-                        <td>{{$d->kode_wilayah}}</td>
-                        <td>{{$d->kode_pos}}</td>
-                        <td>{{$d->provinsi}}</td>
-                        <td>{{$d->kota}}</td>
-                        <td>{{$d->kecamatan}}</td>
-                        <td>{{$d->kelurahan}}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </thead>
-        </table>
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-        <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script>
-            $(document).ready(function(){
-                $('#table').dataTable();
-            });
         </script>
     </body>
 </html>
