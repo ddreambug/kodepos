@@ -54,7 +54,8 @@
         <div>  
             
        
-        <table>
+        <table id="table">
+            <thead>
                 <tr>
                     <td>KODE WILAYAH</td>
                     <td>KODE POS</td>
@@ -63,18 +64,26 @@
                     <td>KECAMATAN</td>
                     <td>KELURAHAN</td>
                 </tr>
-                @foreach ($datakota as $d)
-                <tr>
-                    <td>{{$d->kode_wilayah}}</td>
-                    <td>{{$d->kode_pos}}</td>
-                    <td>{{$d->provinsi}}</td>
-                    <td>{{$d->kota}}</td>
-                    <td>{{$d->kecamatan}}</td>
-                    <td>{{$d->kelurahan}}</td>
-                </tr>
-                @endforeach
+                <tbody>
+                    @foreach ($datakota as $d)
+                    <tr>
+                        <td>{{$d->kode_wilayah}}</td>
+                        <td>{{$d->kode_pos}}</td>
+                        <td>{{$d->provinsi}}</td>
+                        <td>{{$d->kota}}</td>
+                        <td>{{$d->kecamatan}}</td>
+                        <td>{{$d->kelurahan}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </thead>
         </table>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#table').dataTable();
+            });
+        </script>
     </body>
 </html>
