@@ -49,7 +49,7 @@
                     <input type="submit" value="save">
                     @if(Session::has('error'))
                         <div class="alert alert-danger">
-                          <a style="color: red;" id="alertFailed">{{ Session::get('error') }}, Cek Lagi Inputan Anda!</a>
+                          <a style="color: red;" id="alertFailed">{{ Session::get('error') }}</a>
                         </div>
                     @elseif(Session::has('success'))
                         <div class="alert alert-success">

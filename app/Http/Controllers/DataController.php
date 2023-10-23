@@ -37,21 +37,21 @@ class DataController extends Controller
 
     public function parseData(Request $request){
         $data = $request->input('data'); 
-        $dataComponents = explode('|', $data);
+        $array = preg_split("/" . preg_quote("|", "/") . "/", $data);
+        $array = preg_replace('/_/', ' ', $array);
 
-        if (count($dataComponents) === 6) {
-            list($kode_wilayah, $kode_pos, $provinsi, $kota, $kecamatan, $kelurahan) = $dataComponents;
 
+        if (count($array) === 6) {
             return [
-                'kode_wilayah' => $kode_wilayah,
-                'kode_pos' => $kode_pos,
-                'provinsi' => $provinsi,
-                'kota' => $kota,
-                'kecamatan' => $kecamatan,
-                'kelurahan' => $kelurahan,
+                'kode_wilayah' => $array[0],
+                'kode_pos' => $array[1],
+                'provinsi' => $array[2],
+                'kota' => $array[3],
+                'kecamatan' => $array[4],
+                'kelurahan' => $array[5],
             ];
         } else {
-            throw new \InvalidArgumentException('Invalid data format');
+            throw new \InvalidArgumentException('Invalid data format! Cek Lagi Inputan Anda!');
         }
     }
 
